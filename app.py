@@ -9,7 +9,9 @@ BASE_URL = "https://memepedia.ru"
 
 def fetch_latest_memes(limit: int = 10):
     resp = requests.get(BASE_URL)
+    print("HTTP status:", resp.status_code)
     if resp.status_code != 200:
+        print("Response text snippet:", resp.text[:200])
         return []
 
     soup = BeautifulSoup(resp.text, "html.parser")

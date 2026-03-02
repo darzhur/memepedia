@@ -15,6 +15,7 @@ def fetch_latest_memes(limit: int = 10):
         return []
 
     soup = BeautifulSoup(resp.text, "html.parser")
+    print("All h2 tags with class 'entry-title':", soup.find_all("h2", class_="entry-title"))
     memes = []
 
     # Находим все заголовки мемов

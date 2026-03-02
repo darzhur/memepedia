@@ -1,15 +1,15 @@
-from fastapi import FastAPI
+# from fastapi import FastAPI
 
-app = FastAPI()
+# app = FastAPI()
 
-@app.get("/")
-async def root():
+# @app.get("/")
+# async def root():
     return {"status": "ok"}
 
-@app.get("/memes")
-async def get_memes():
+# @app.get("/memes")
+# async def get_memes():
     # твой код для мемов
-    return []
+#     return []
 
 # тест
 # uvicorn app:app --reload --host 127.0.0.1 --port 8000

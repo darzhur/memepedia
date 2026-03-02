@@ -1,1 +1,22 @@
 .env
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Виртуальные окружения
+venv/
+env/
+.meme_bot_env/
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.bak
+
+# Конфигурации IDE
+.vscode/
+.idea/
+
+# Файлы базы данных, если есть
+*.sqlite3

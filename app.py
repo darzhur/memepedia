@@ -3,6 +3,14 @@ from fastapi.responses import JSONResponse
 import requests
 from bs4 import BeautifulSoup
 import logging
+import requests
+
+try:
+    response = requests.get("https://memepedia.ru", timeout=5)
+    print("Статус:", response.status_code)
+    print("Первые 200 символов ответа:", response.text[:200])
+except requests.exceptions.RequestException as e:
+    print("Ошибка доступа к сайту:", e)
 
 app = FastAPI(title="MCP Memes Server")
 

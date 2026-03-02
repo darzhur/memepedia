@@ -2,24 +2,25 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 import requests
 from bs4 import BeautifulSoup
+import logging
 
 app = FastAPI(title="MCP Memes Server")
 
 BASE_URL = "https://memepedia.ru"
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 def fetch_latest_memes(limit: int = 10):
     resp = requests.get(BASE_URL, headers={"User-Agent": "Mozilla/5.0"})
-    print("HTTP status:", resp.status_code)
-    print("Final URL after redirects:", resp.url)
-    print("Response snippet:", resp.text[:500])  # первые 500 символов страницы
-    if resp.status_code != 200:
-        return []
+    logger.info(f"HTTP status: {resp.status_code}")
+    logger.info(f"Final URL after redirects: {resp.url}")
+    logger.info(f"Response snippet (первые 500 символов): {resp.text[:500]}")
 
     soup = BeautifulSoup(resp.text, "html.parser")
-    print("All h2 tags with class 'entry-title':", soup.find_all("h2", class_="entry-title"))
-    memes = []
+    logger.info(f"All h2 tags with class 'entry-title': {soup.find_all('h2', class_='entry-title')}")
 
-    # Находим все заголовки мемов
+    memes = []
     for entry in soup.find_all("h2", class_="entry-title")[:limit]:
         a_tag = entry.find("a")
         if not a_tag:

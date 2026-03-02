@@ -20,10 +20,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def fetch_latest_memes(limit: int = 10):
-    resp = requests.get(BASE_URL, headers={"User-Agent": "Mozilla/5.0"})
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    resp = requests.get(BASE_URL, headers=headers, timeout=5)
     logger.info(f"HTTP status: {resp.status_code}")
     logger.info(f"Final URL after redirects: {resp.url}")
-    logger.info(f"Response snippet (первые 500 символов): {resp.text[:500]}")
+    logger.info(f"Response snippet (первые 1000 символов): {resp.text[:500]}")
 
     soup = BeautifulSoup(resp.text, "html.parser")
     logger.info(f"All h2 tags with class 'entry-title': {soup.find_all('h2', class_='entry-title')}")

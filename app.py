@@ -10,6 +10,7 @@ BASE_URL = "https://memepedia.ru"
 def fetch_latest_memes(limit: int = 10):
     resp = requests.get(BASE_URL, headers={"User-Agent": "Mozilla/5.0"})
     print("HTTP status:", resp.status_code)
+    print("Final URL after redirects:", resp.url)
     print("Response snippet:", resp.text[:500])  # первые 500 символов страницы
     if resp.status_code != 200:
         return []

@@ -8,10 +8,10 @@ app = FastAPI(title="MCP Memes Server")
 BASE_URL = "https://memepedia.ru"
 
 def fetch_latest_memes(limit: int = 10):
-    resp = requests.get(BASE_URL)
+    resp = requests.get(BASE_URL, headers={"User-Agent": "Mozilla/5.0"})
     print("HTTP status:", resp.status_code)
+    print("Response snippet:", resp.text[:500])  # первые 500 символов страницы
     if resp.status_code != 200:
-        print("Response text snippet:", resp.text[:200])
         return []
 
     soup = BeautifulSoup(resp.text, "html.parser")
